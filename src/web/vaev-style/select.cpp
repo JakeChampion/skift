@@ -292,8 +292,9 @@ static OpCode _peekOpCode(Cursor<Css::Sst> &cur) {
             return OpCode::DESCENDANT;
         } else {
             auto op = _peekOpCode(cur);
+            cur.next();
 
-            if (cur.peek(1).token.type == Css::Token::WHITESPACE) {
+            if (cur.skip(Css::Token::WHITESPACE)) {
                 if (cur.ended()) {
                     return OpCode::NOP;
                 }
